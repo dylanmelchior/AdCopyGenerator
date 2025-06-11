@@ -1,6 +1,6 @@
 import sys
 import os
-import csv
+import io
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -20,23 +20,14 @@ st.title("Sales Proposition + Headline Generator")
 input_type = st.radio("Choose input method:", ["Manual description", "Website URL"])
 file_name = st.text_input("Enter file name (e.g., output.csv):")
 
-## Export to csv functionality
-def export_to_csv(file_name):
-    headers = ["Tagline"]
-    headers += [f"Short Headline {i+1}" for i in range(15)]
-    headers += [f"Long Headline {i+1}" for i in range(5)]
-    headers += [f"Description {i+1}" for i in range(5)]
-
-    row = [st.session_state.tagline or ""]
-
-    row += (st.session_state.short_headlines or [])[:15] + [""] * (15 - len(st.session_state.short_headlines or []))
-    row += (st.session_state.long_headlines or [])[:5] + [""] * (5 - len(st.session_state.long_headlines or []))
-    row += (st.session_state.descriptions or [])[:5] + [""] * (5 - len(st.session_state.descriptions or []))
-
-    with open(file_name, 'w', newline='', encoding='utf-8') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(headers)
-        writer.writerow(row)
+def get_csv_buffer(tagline, short_headlines, long_headlines, descriptions):
+    output = io.StringIO()
+    writer = csv.writer(output)
+    headers = ["Tagline"] + [f"Short {i+1}" for i in range(15)] + [f"Long {i+1}" for i in range(5)] + [f"Description {i+1}" for i in range(5)]
+    row = [tagline] + short_headlines + long_headlines + descriptions
+    writer.writerow(headers)
+    writer.writerow(row)
+    return output.getvalue()
 
 ## Helper Method to Display Output
 def display_output():
@@ -71,15 +62,5 @@ elif input_type == "Website URL":
         st.write("DEBUG output from generate_outputs_from_url:", outputs)
         display_output()
 
-## Export button functionality
-if st.button("Export"):
-    if all([
-        st.session_state.tagline,
-        st.session_state.long_headlines,
-        st.session_state.short_headlines,
-        st.session_state.descriptions
-    ]):
-        export_to_csv(file_name)
-        st.success(f"Exported to {file_name}")
-    else:
-        st.warning("No content generated. Please run generation first.")
+csv_data = get_csv_buffer(st.session_state.tagline, st.session_state.short_headlines, st.session_state.long_headlines, st.session_state.descriptions)
+st.download_button("Download CSV", data=csv_data, file_name="adcopy_outputs.csv", mime="text/csv")

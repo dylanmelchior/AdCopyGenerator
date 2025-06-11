@@ -10,7 +10,7 @@ venv/
 env/
 
 # Environment variables and secrets
-.env
+app/.env
 *.env
 
 # Streamlit Cloud secrets
