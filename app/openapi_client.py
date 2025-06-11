@@ -8,8 +8,7 @@ load_dotenv()
 api_key = st.secrets["openai"]["api_key"]
 
 def call_openAI(prompt):
-    client = OpenAI()
-    client.api_key = api_key
+    client = OpenAI(api_key=api_key)
     response = client.responses.create(
         model="gpt-4.1",
         input = prompt
