@@ -3,8 +3,9 @@ import os
 from dotenv import load_dotenv
 import streamlit as st
 
+load_dotenv()
 
-api_key = st.secrets.get("openai", {}).get("api_key")
+api_key = st.secrets["openai"]["api_key"]
 
 def call_openAI(prompt):
     client = OpenAI()
