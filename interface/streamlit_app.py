@@ -13,6 +13,8 @@ for key in ["tagline", "long_headlines", "short_headlines", "descriptions"]:
     if key not in st.session_state:
         st.session_state[key] = None
 
+st.write("API key loaded:", bool(st.secrets.get("openai", {}).get("api_key")))
+
 ## Title and interface
 st.title("Sales Proposition + Headline Generator")
 input_type = st.radio("Choose input method:", ["Manual description", "Website URL"])
