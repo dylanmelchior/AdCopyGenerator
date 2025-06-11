@@ -1,0 +1,39 @@
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+*.env
+
+# Streamlit Cloud secrets
+.streamlit/secrets.toml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor configs
+.vscode/
+.idea/
+
+# Jupyter & Streamlit cache
+.ipynb_checkpoints/
+.streamlit/config.toml
+.streamlit/state/
+
+# Log and output files
+*.log
+*.csv
+*.tmp
+*.bak
+
+# Bytecode cache
+*.pyc
