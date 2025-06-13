@@ -24,7 +24,7 @@ def get_csv_buffer(tagline, short_headlines, long_headlines, descriptions):
     output = io.StringIO()
     writer = csv.writer(output)
     headers = ["Campaign"] + ["Asset Group"] + [f"Headline {i+1}" for i in range(15)] + [f"Long headline {i+1}" for i in range(5)] + [f"Description {i+1}" for i in range(5)]
-    row = [""] + [""] + short_headlines + long_headlines + descriptions
+    row = [""] + [""] + short_headlines + long_headlines + descriptions # Empty campaign and asset group at start
     writer.writerow(headers)
     writer.writerow(row)
     return output.getvalue()
