@@ -63,4 +63,6 @@ elif input_type == "Website URL":
         display_output()
 
 csv_data = get_csv_buffer(st.session_state.tagline, st.session_state.short_headlines, st.session_state.long_headlines, st.session_state.descriptions)
-st.download_button("Download CSV", data=csv_data, file_name="adcopy_outputs.csv", mime="text/csv")
+if not file_name:
+    file_name = "output.csv"
+st.download_button("Download CSV", data=csv_data, file_name=file_name, mime="text/csv")
