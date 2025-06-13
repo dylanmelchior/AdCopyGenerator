@@ -20,7 +20,7 @@ st.title("Sales Proposition + Headline Generator")
 input_type = st.radio("Choose input method:", ["Manual description", "Website URL"])
 file_name = st.text_input("Enter file name (e.g., output.csv):")
 
-def get_csv_buffer(tagline, short_headlines, long_headlines, descriptions):
+def get_csv_buffer(short_headlines, long_headlines, descriptions):
     output = io.StringIO()
     writer = csv.writer(output)
     headers = ["Campaign"] + ["Asset Group"] + [f"Headline {i+1}" for i in range(15)] + [f"Long headline {i+1}" for i in range(5)] + [f"Description {i+1}" for i in range(5)]
@@ -62,7 +62,7 @@ elif input_type == "Website URL":
         st.write("DEBUG output from generate_outputs_from_url:", outputs)
         display_output()
 
-csv_data = get_csv_buffer(st.session_state.tagline, st.session_state.short_headlines, st.session_state.long_headlines, st.session_state.descriptions)
+csv_data = get_csv_buffer(st.session_state.short_headlines, st.session_state.long_headlines, st.session_state.descriptions)
 if not file_name:
     file_name = "output.csv"
 st.download_button("Download CSV", data=csv_data, file_name=file_name, mime="text/csv")
