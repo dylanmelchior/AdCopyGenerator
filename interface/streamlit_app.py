@@ -23,8 +23,8 @@ file_name = st.text_input("Enter file name (e.g., output.csv):")
 def get_csv_buffer(tagline, short_headlines, long_headlines, descriptions):
     output = io.StringIO()
     writer = csv.writer(output)
-    headers = ["Tagline"] + [f"Short {i+1}" for i in range(15)] + [f"Long {i+1}" for i in range(5)] + [f"Description {i+1}" for i in range(5)]
-    row = [tagline] + short_headlines + long_headlines + descriptions
+    headers = ["Campaign"] + ["Asset Group"] + [f"Headline {i+1}" for i in range(15)] + [f"Long headline {i+1}" for i in range(5)] + [f"Description {i+1}" for i in range(5)]
+    row = [""] + [""] + short_headlines + long_headlines + descriptions
     writer.writerow(headers)
     writer.writerow(row)
     return output.getvalue()
