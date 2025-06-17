@@ -55,7 +55,7 @@ if input_type == "Manual description":
 
 ## Website URL Scrape Input Functionality
 elif input_type == "Website URL":
-    url_input = st.text_input("Enter company website:")
+    url_input = st.text_input("Enter company website (MUST BE EXACT URL):")
     if st.button("Generate from URL"):
         outputs = app.generator.generate_outputs_from_url(url_input)
         st.session_state.tagline, st.session_state.long_headlines, st.session_state.short_headlines, st.session_state.descriptions = app.generator.generate_outputs_from_url(url_input)
