@@ -16,7 +16,7 @@ for key in ["tagline", "long_headlines", "short_headlines", "descriptions"]:
 st.write("API key loaded:", bool(st.secrets.get("openai", {}).get("api_key")))
 
 ## Title and interface
-st.title("Sales Proposition + Headline Generator")
+st.title("Ad Copy Generator")
 input_type = st.radio("Choose input method:", ["Manual description", "Website URL"])
 file_name = st.text_input("Enter file name (e.g., output.csv):")
 
