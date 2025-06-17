@@ -10,6 +10,8 @@ def generate_outputs_from_text(company_info_text):
 
 def generate_outputs_from_url(url):
     info = extract_company_info(url)
+    if(info == "Scraper Blocked"):
+        return None
     return generate_outputs_from_text(info)
 
 def parse_response(response_text):

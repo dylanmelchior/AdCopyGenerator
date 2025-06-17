@@ -57,9 +57,12 @@ if input_type == "Manual description":
 elif input_type == "Website URL":
     url_input = st.text_input("Enter company website (MUST BE EXACT URL):")
     if st.button("Generate from URL"):
-        outputs = app.generator.generate_outputs_from_url(url_input)
-        st.session_state.tagline, st.session_state.long_headlines, st.session_state.short_headlines, st.session_state.descriptions = app.generator.generate_outputs_from_url(url_input)
-        display_output()
+        if(app.generator.generate_outputs_from_url(url_input) == None):
+            st.write("Error: Website URL does not permit GPT or other AI tools to access it. Use manual description mode.")
+        else:
+            st.session_state.tagline, st.session_state.long_headlines, st.session_state.short_headlines, st.session_state.descriptions = (
+                app.generator.generate_outputs_from_url(url_input))
+            display_output()
 
 csv_data = get_csv_buffer(st.session_state.short_headlines, st.session_state.long_headlines, st.session_state.descriptions)
 if not file_name:

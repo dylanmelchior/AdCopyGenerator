@@ -5,7 +5,7 @@ def extract_company_info(url):
     try:
         response = requests.get(url)
         if response.status_code == 403:
-            return None
+            return "Scraper Blocked"
 
         soup = BeautifulSoup(response.text, 'html.parser')
 
