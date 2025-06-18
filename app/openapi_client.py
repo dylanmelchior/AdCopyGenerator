@@ -17,7 +17,7 @@ def call_openAI(prompt):
 
 
     response = client.responses.create(
-        model="gpt-4.1",
+        model="gpt-4o-2024-05-13",
         input = prompt
     )
 
